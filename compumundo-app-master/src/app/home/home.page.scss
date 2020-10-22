@@ -1,0 +1,44 @@
+.welcome-card img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+.logo{
+  font-size: 5rem;  
+  margin: 20px 0;
+
+  &-icon{
+    color: var(--ion-color-primary);
+  }
+}
+
+.user-name{
+  color: var(--ion-color-primary);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+ 
+.menu-item{
+  background: #f9f9f9;
+  border: solid 1px #b5aafb;
+  padding: 20px 10px;
+  margin-bottom: 20px;
+  color: #333333;
+}
+.item-ruta{
+  padding: 20px 10px;
+  box-shadow: 0 10px 10px #e1e1e1;
+  font-size: 1.6rem;
+}
+ion-button.menu-item{
+  color: var(--ion-color-primary);
+}
+
+.btns-container{  
+   display: flex;
+   justify-content: center;
+   align-items: baseline;
+   button:first-child{
+     margin: 10px 10px 0 0;
+   }
+}

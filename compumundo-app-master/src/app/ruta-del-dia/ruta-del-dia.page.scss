@@ -1,0 +1,65 @@
+ion-title {
+  text-align: center;
+}
+
+ion-segment {
+  ion-label {
+    text-transform: capitalize;
+  }
+}
+
+.left-to-visit {
+  text-align: center;
+  font-size: 14px;
+  color: grey;
+  margin: 30px 0;
+}
+
+.client-card {
+  background: #f9f9f9;
+  border: solid 1px #b5aafb;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 20px;
+  color: #333333;
+
+  h3 {
+    margin-top: 10px;
+  }
+  h4,
+  h5 {
+    margin: 8px 0;
+    font-weight: 400;
+  }
+  small {
+    color: gray;
+  }
+  &::after {
+    content: "";
+    display: block;
+    background: url(/assets/icon/gray-check.svg) no-repeat;
+    width: 24px;
+    height: 24px;
+    right: 20px;
+    top: 10px;
+    margin: 0 6px 0 0;
+    position: absolute;
+  }
+  
+}
+.client-card_visited {
+  background: #f4fff4;
+  border-color: #28a745;
+
+  &::after {
+    content: "";
+    display: block;
+    background: url(/assets/icon/green-check.svg) no-repeat;
+    width: 24px;
+    height: 24px;
+    right: 20px;
+    top: 10px;
+    margin: 0 6px 0 0;
+    position: absolute;
+  }
+}

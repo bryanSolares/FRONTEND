@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="atrás"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ruta del Día</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-template [ngIf]="!loaded" [ngIfElse]="loadedTemplate">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </ng-template>
+  <ng-template #loadedTemplate>
+
+    <ion-segment [(ngModel)]="activeSegment" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="p" checked>
+        <ion-label>Por visitar</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="v">
+        <ion-label>Visitados</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p class="left-to-visit">{{rutasVisitadas.length}} Vistadas de {{total}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <ng-template [ngIf]="actualRutas && actualRutas.length" [ngIfElse]="noElements">
+          <div *ngFor="let item of actualRutas" class="col-sm-12" (click)="registrarVisita(item)">
+            <div class="client-card" [ngClass]="{'client-card_visited': item.visitada}">
+              <h3>{{item.Nombre}}</h3>
+              <h5>Codigo: {{item.CODCliente}}</h5>
+              <h6>Ruta: {{item.Ruta}}</h6>
+              <small>{{item.Direccion}}</small>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #noElements>
+          <div class="col-sm-12">
+            <div class="client-card">
+              <h3>No hay elementos que mostrar</h3>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </ng-template>
+</ion-content>

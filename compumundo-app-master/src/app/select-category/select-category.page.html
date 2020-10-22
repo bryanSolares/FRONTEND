@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Categorías</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <ion-searchbar [(ngModel)]="search"  placeholder="Por nombre"></ion-searchbar>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <p class="small-title">
+          Selecciona la categoría del producto
+        </p>
+      </div>
+      <div class="col-sm-12">
+        <div class="category-btns">
+          <ng-template ngFor let-item [ngForOf]="categorias | async">
+            <button *ngIf="item && isAcceptedThing(item)" type="button" class="btn btn-outline-primary btn-block"
+              routerLink="/select-products" [queryParams]="{categoria: item.id }" queryParamsHandling="merge">
+              {{item.nombre}}
+            </button>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

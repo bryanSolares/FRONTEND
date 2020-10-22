@@ -1,0 +1,8 @@
+{
+  "name": "rutaApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "48fdb85c"
+}

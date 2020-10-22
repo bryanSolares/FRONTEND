@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="atrás"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Liquidaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-template [ngIf]="!loaded" [ngIfElse]="loadedTemplate">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </ng-template>
+  <ng-template #loadedTemplate>
+
+    <ion-segment [(ngModel)]="segmento">
+      <ion-segment-button value="s" checked>
+        <ion-label>Sin liquidar</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="l">
+        <ion-label>Liquidados</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button (click)="liquidar()">
+        <ion-icon name="send"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <div class="container content">
+      <div class="row mt-2">
+        <div class="col-sm-12"></div>
+      </div>
+      <ng-container [ngSwitch]="segmento">
+        <div *ngSwitchCase="'s'" class="row">
+          <ng-template [ngIf]="recibosLiquidarObj && recibosLiquidarObj.length" [ngIfElse]="noData">
+            <div *ngFor="let it of recibosLiquidarObj" class="col-sm-12">
+              <div class="bill-card" [class.highlight]="it.selected">
+                <div class="bill-info">
+                  <h3>Recibo {{it.serieRec}} {{it.correlativoRec}}</h3>
+                </div>
+                <div class="total-charge">
+                  <p class="total">
+                    Efectivo: {{it.totalEfectivo | currency: "Q "}}
+                    <br>
+                    Cheques: {{it.totalCheque | currency: "Q "}}
+                  </p>
+                  <button (click)="it.selected = !it.selected" type="button" class="btn btn-link">
+                    Seleccionar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+
+        </div>
+        <div *ngSwitchCase="'l'" class="row">
+          <ng-template [ngIf]="recibosLiquidadosObj.length" [ngIfElse]="noData">
+            <div *ngFor="let it of recibosLiquidadosObj" class="col-sm-12">
+              <div class="bill-card delivered">
+                <div class="bill-info">
+                  <h3>Recibo {{it.serieRec}} {{it.correlativoRec}}</h3>
+                </div>
+                <p>
+                  No. depósito: {{it.deposito}}
+                </p>
+                <div class="total-charge">
+                  <p class="total">
+                    Efectivo: {{it.totalEfectivo | currency: "Q "}}
+                    <br>
+                    Cheques: {{it.totalCheque | currency: "Q "}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </ng-container>
+      <ng-template #noData>
+        <div class="col-sm-12">
+          <div class="client-card">
+            <h3>No hay elementos que mostrar</h3>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </ng-template>
+</ion-content>

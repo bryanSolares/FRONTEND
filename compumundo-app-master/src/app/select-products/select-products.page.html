@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="atrás"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Productos - {{ categoria }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="container footer-container">
+    <div class="row">
+      <div class="col">
+        <ion-searchbar
+          [(ngModel)]="search"
+          placeholder="Por nombre"
+        ></ion-searchbar>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <p class="small-title">Selecciona y agrega productos</p>
+      </div>
+      <!-- 
+      <div class="col-sm-12">
+        <div class="category-btns">
+          <button type="button" class="btn btn-primary btn-block">Bebidas</button>
+        </div>
+      </div>
+       -->
+      <div *ngFor="let item of productos" class="col-sm-12">
+        <div class="product-card" *ngIf="isAcceptedThing(item)">
+          <h3>{{item.Nombre}}</h3>
+          <div class="producto-info">
+            <small
+              >Unidades por presentación: {{item.UnidadxPresentacion}}</small
+            >
+            <h4>Codigo: {{item.CODProducto}}</h4>
+          </div>
+          <div class="amount-add">
+            <p>Cantidad</p>
+            <div class="amount-buttons">
+              <ion-icon (click)="restAmount(item)" name="remove"></ion-icon>
+              <input
+                type="input"
+                step="0.01"
+                min="0"
+                mask="separator.0"
+                [allowNegativeNumbers]="false"
+                thousandSeparator=","
+                [(ngModel)]="item.cantidad"
+                (ngModelChange)="calcularTotalItem(item)"
+                placeholder="0"
+              />
+              <ion-icon (click)="addAmount(item)" name="add"></ion-icon>
+            </div>
+            <p>{{item.total || 0 | currency:"Q "}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="total">Total: {{total | currency:"Q "}}</div>
+    <button (click)="agregarProductos()" class="btn btn-primary">
+      Actualizar
+    </button>
+  </footer>
+</ion-content>

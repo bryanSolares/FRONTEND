@@ -1,0 +1,81 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Tienda Regalo de Dios</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-fab horizontal="end" vertical="bottom" slot="fixed">
+  <ion-fab-button (click)="emitirCobro()">
+    <ion-icon name="basket"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-content>
+  <ng-template [ngIf]="!loaded" [ngIfElse]="loadedTemplate">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </ng-template>
+  <ng-template #loadedTemplate>
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div *ngIf="item | async as its" class="client-info">
+              <div class="back-title">
+                <ion-back-button defaultHref="/" text="atrás"></ion-back-button>
+                <h3 class="nombreCliente">{{its.Nombre}}</h3>
+              </div>
+              <div class="cod-nit">
+                <h5>Codigo: {{its.IdCliente}}</h5>
+              </div>
+              <address>{{its.Direccion}}</address>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container content">
+
+
+      <div class="row">
+        <div class="col-sm-12">
+          <p>Presione el signo menos de cada producto para realizar una devolución respectivamente.</p>
+        </div>
+        <div *ngFor="let item of canasta" class="col-sm-12">
+          <div class="product-card">
+            <h3>{{item.Nombre}}</h3>
+            <small>Lote: {{item.Lote}}</small><br>
+            <small>Fecha de Vencimiento: {{item.FechaVencimiento}}</small>
+
+            <div class="producto-info">
+              <small>Unidades por presentación: {{item.UnidadxPresentacion}}</small>
+              <h4>Codigo: {{item.idProducto}}</h4>
+            </div>
+            <div class="producto-info" style="margin-top: -1.5em;">
+              <h6>Precio unitario: {{item.PrecioUnitario | currency: "Q "}}</h6>
+              <h6>Subtotal: {{item.Subtotal | currency: "Q " }}</h6>
+            </div>
+            <div class="amount-buttons">
+              <ion-icon *ngIf="!item.bloqueado" (click)="restAmount(item)" name="remove"></ion-icon>
+              <input type="number" step="1" min="0" max="1" [(ngModel)]="item.Cantidad" disabled placeholder="0">
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!canasta.length" class="col-sm-12">
+          <div class="product-card">
+            <h3>No hay productos en su orden</h3>
+            <small>Presione seleccionar productos para comenzar</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="total">
+        Total: {{total | currency:"Q "}}
+      </div>
+    </footer>
+  </ng-template>
+
+</ion-content>

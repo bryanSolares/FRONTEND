@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="atrás"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Listado de Clientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-template [ngIf]="!loaded" [ngIfElse]="loadedTemplate">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </ng-template>
+  <ng-template #loadedTemplate>
+    <div class="container mt-3">
+      <div class="row">
+        <div *ngFor="let item of rutas | async" class="col-sm-12" routerLink="/cliente"
+          [queryParams]="{ cliente: item.id }">
+          <div class="client-card" [ngClass]="{'client-card_visited': item.visitada}">
+            <h3>{{item.Nombre}}</h3>
+            <h5>Codigo: {{item.CODCliente}}</h5>
+            <small>{{item.Direccion}}</small>
+          </div>
+        </div>
+        <ng-template [ngIf]="!(rutas | async)?.length">
+          <div class="col-sm-12">
+            <div class="client-card">
+              <h3>No hay elementos que mostrar</h3>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </ng-template>
+</ion-content>

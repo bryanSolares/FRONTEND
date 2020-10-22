@@ -1,0 +1,84 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Tienda Regalo de Dios</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <ng-template [ngIf]="!loaded" [ngIfElse]="loadedTemplate">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </ng-template>
+  <ng-template #loadedTemplate>
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="client-info">
+              <div class="back-title">
+                <ion-back-button defaultHref="/" text="atrás"></ion-back-button>
+                <h3 class="nombreCliente">{{cliente.Nombre}}</h3>
+              </div>
+              <div class="cod-nit">
+                <h5>Codigo: {{cliente.CODCliente}}</h5>
+                <h5>NIT: {{cliente.Nit}}</h5>
+              </div>
+              <address>{{cliente.Direccion}}</address>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container content">
+      <div class="row">
+        <div class="col">
+          <a routerLink="/select-category" queryParamsHandling="preserve"
+            class="btn btn-primary btn-block btn-select-product">
+            <ion-icon name="add"></ion-icon>Seleccionar productos
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>Pedido</h2>
+        </div>
+        <div *ngFor="let item of canasta" class="col-sm-12">
+          <div class="product-card">
+            <ion-icon class="delete-icon" (click)="borrar(item)" name="trash"></ion-icon>
+            <h3>{{item.Nombre}}</h3>
+            <div class="producto-info">
+              <small>Unidades por presentación: {{item.UnidadxPresentacion}}</small>
+              <h4>Codigo: {{item.CODProducto}}</h4>
+            </div>
+            <div class="producto-info" style="margin-top: -1.5em;">
+              <h6>Precio unitario: {{item.total / item.cantidad | currency: "Q "}}</h6>
+              <h6>Subtotal: {{item.total | currency: "Q " }}</h6>
+            </div>
+            <div class="amount-buttons">
+              <ion-icon (click)="restAmount(item)" name="remove"></ion-icon>
+              <input type="input" step="0.01" min="0" mask="separator.2" [allowNegativeNumbers]="false" thousandSeparator="," [(ngModel)]="item.cantidad"
+                (ngModelChange)="calcularTotalItem(item)" placeholder="0" >
+              <ion-icon (click)="addAmount(item)" name="add"></ion-icon>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!canasta.length" class="col-sm-12">
+          <div class="product-card">
+            <h3>No hay productos en su orden</h3>
+            <small>Presione seleccionar productos para comenzar</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="total">
+        Total: {{total | currency:"Q "}}
+      </div>
+      <button [disabled]="!total" (click)="crearOrden()" class="btn btn-primary">Crear Orden</button>
+    </footer>
+  </ng-template>
+</ion-content>

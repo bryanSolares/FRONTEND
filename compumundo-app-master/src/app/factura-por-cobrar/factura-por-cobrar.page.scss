@@ -1,0 +1,83 @@
+ion-title{
+    text-align: center;
+}
+
+.content{
+    padding: 30px 16px 80px 16px;
+}
+
+
+.client-name{
+    color: var(--ion-color-primary);
+}
+.client-info{
+    display: flex;
+    justify-content: space-between;
+    color: gray;    
+}
+
+.btn-add-bills{
+    display: flex;    
+    align-items: center;    
+    justify-content: center;
+    padding: 12px 10px;
+    margin: 20px 0 30px 0;
+
+    ion-icon {
+        border-radius: 100px;
+        padding: 2px;
+        margin-right: 10px;
+        color: var(--ion-color-primary);
+        background: var(--ion-color-light);
+    }
+}
+
+.bill-card{
+    background: #f9f9f9;
+    border: solid 1px #b5aafb;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #333333;
+
+    h3{
+        margin: 0px;
+        font-size: 1rem;
+    }
+    .bill-header{
+        display: flex;
+        justify-content: space-between;
+    }
+    .bill-info{
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 5px;   
+            
+        h4, h5{
+            font-weight: 300;
+            font-size: .9rem;
+        }
+    }
+    .bill-content{
+        margin: 20px 0;        
+
+        .bill-item{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: solid 1px #dadada;
+            p{
+                padding: 0;
+                margin: 0;
+            }
+        }
+    }
+}
+
+footer{
+    .total{
+        color: var(--ion-color-primary);
+        font-weight: 600;
+        font-size: 1.2rem;
+    }
+}

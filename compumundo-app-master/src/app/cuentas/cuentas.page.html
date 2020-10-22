@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="atrás"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cuentas Bancarias</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-template [ngIf]="!loaded" [ngIfElse]="loadedTemplate">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </ng-template>
+  <ng-template #loadedTemplate>
+    <div class="container content">
+      <div class="row mt-2">
+        <div class="col-sm-12"></div>
+      </div>
+      <div class="row">
+        <div *ngFor="let it of bancos" class="col-sm-12">
+          <div class="bill-card">
+            <div class="bill-info">
+              <h3>Banco {{it.NombreBanco}}</h3>
+              <h5>{{it.Nombre}}</h5>
+            </div>
+            <div class="total-charge">
+              <p class="total">
+                No: {{it.CODCuenta}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ion-content>

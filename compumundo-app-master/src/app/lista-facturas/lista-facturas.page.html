@@ -1,0 +1,106 @@
+<ion-header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="client-info">
+          <div class="back-title">
+            <a href="/ruta-del-rut">
+              <ion-icon name="arrow-back"></ion-icon>
+            </a>
+            <h3>{{(item | async)?.NombreCliente}}</h3>
+          </div>
+          <div class="cod-nit">
+            <h5>Codigo: {{(item | async)?.IdCliente}}</h5>
+          </div>
+          <address>
+            {{(item | async)?.Direccion}} <br>
+            Cobros en efectivo: <b>{{ cobros.efectivo }} cobro(s)</b><br>
+            Cobros con cheque: <b>{{ cobros.cheque }} cobro(s)</b>
+          </address>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-header>
+<ion-content>
+
+  <ion-segment [(ngModel)]="segmento" >
+    <ion-segment-button value="e" checked>
+      <ion-label>Entregar</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="c">
+      <ion-label>Cobrar</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="o">
+      <ion-label>Otras</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- 
+    Clases de estado:
+    1 Entregada: "delivered"
+    2 Rechazada: "rejected"
+    3 Devolución: "partial"
+    4 Pagada: "paid"
+   -->
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" class="test">
+    <ion-fab-button (click)="emitirReciboCobro()">
+      <ion-icon name="print"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="container content">
+    <ng-container [ngSwitch]="segmento">
+      <div *ngSwitchCase="'e'" class="row">
+        <div *ngFor="let it of facturasEntregar" class="col-sm-12">
+          <div class="bill-card" [ngClass]="getClase(it.estado)">
+            <div class="bill-info">
+              <h3>Factura {{it.SerieFactura}} {{it.IdFactura}}</h3>
+            </div>
+            <div class="total-charge">
+              <p *ngIf="facturasDetalleKey && facturasDetalleKey[it.SerieFactura + it.IdFactura]" class="total">Por pagar:
+                {{faltante(facturasDetalleKey[it.SerieFactura + it.IdFactura]) | currency: "Q "}}</p>
+              <button *ngIf="facturasDetalleKey && facturasDetalleKey[it.SerieFactura + it.IdFactura]"
+                (click)="accion(it, facturasDetalleKey[it.SerieFactura + it.IdFactura])" type="button"
+                class="btn btn-link">{{getLabel(it.estado, facturasDetalleKey[it.SerieFactura + it.IdFactura].Tipo)}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'c'" class="row">
+        <div *ngFor="let it of facturasCobrar" class="col-sm-12">
+          <div class="bill-card" [ngClass]="getClase(it.estado)">
+            <div class="bill-info">
+              <h3>Factura {{it.SerieFactura}} {{it.IdFactura}}</h3>
+            </div>
+            <div class="total-charge">
+              <p *ngIf="facturasDetalleKey && facturasDetalleKey[it.SerieFactura + it.IdFactura]" class="total">Por pagar:
+                {{faltante(facturasDetalleKey[it.SerieFactura + it.IdFactura]) | currency: "Q "}}</p>
+              <button *ngIf="facturasDetalleKey && facturasDetalleKey[it.SerieFactura + it.IdFactura]"
+                (click)="accion(it, facturasDetalleKey[it.SerieFactura + it.IdFactura])" type="button"
+                class="btn btn-link">{{getLabel(it.estado, it.Tipo)}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'o'" class="row">
+        <div *ngFor="let it of facturasOtras" class="col-sm-12">
+          <div class="bill-card" [ngClass]="getClase(it.estado)">
+            <div class="bill-info">
+              <h3>Factura {{it.SerieFactura}} {{it.IdFactura}}</h3>
+            </div>
+            <div class="total-charge">
+              <p *ngIf="facturasDetalleKey && facturasDetalleKey[it.SerieFactura + it.IdFactura]" class="total">Por pagar:
+                {{faltante(facturasDetalleKey[it.SerieFactura + it.IdFactura]) | currency: "Q "}}</p>
+              <button *ngIf="facturasDetalleKey && facturasDetalleKey[it.SerieFactura + it.IdFactura]"
+                (click)="accion(it, facturasDetalleKey[it.SerieFactura + it.IdFactura])" type="button"
+                class="btn btn-link">{{getLabel(it.estado, it.Tipo)}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+
+</ion-content>

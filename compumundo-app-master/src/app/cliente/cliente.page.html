@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="atrás"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle del cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-template [ngIf]="!loaded" [ngIfElse]="loadedTemplate">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </ng-template>
+  <ng-template #loadedTemplate>
+    <div class="container">
+      <h1>{{cliente.Nombre}}</h1>
+      <hr>
+      <div class="row">
+        <form class="form-horizontal col-md-12" role="form">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Código del cliente:</label>
+            <div class="col-lg-8">
+              <input [(ngModel)]="cliente.CODCliente || cliente.IdCliente" class="form-control" type="text" disabled
+                name="CODCliente">
+            </div>
+          </div>
+          <div *ngIf="!rutasMode" class="form-group">
+            <label class="col-lg-3 control-label">Nit:</label>
+            <div class="col-lg-8">
+              <input [(ngModel)]="cliente.Nit" class="form-control" type="text" name="Nit" disabled>
+            </div>
+          </div>
+          <div *ngIf="!rutasMode" class="form-group">
+            <label class="col-lg-3 control-label">Razón social:</label>
+            <div class="col-lg-8">
+              <input [(ngModel)]="cliente.RazonSocial" name="RazonSocial" class="form-control" type="text" disabled>
+            </div>
+          </div>
+          <div *ngIf="rutasMode" class="form-group">
+            <label class="col-lg-3 control-label">Nombre del cliente:</label>
+            <div class="col-lg-8">
+              <input [(ngModel)]="cliente.Nombre || cliente.NombreCliente" name="NombreCliente" class="form-control" type="text" disabled>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Dirección:</label>
+            <div class="col-lg-8">
+              <input [(ngModel)]="cliente.Direccion" name="Direccion" class="form-control" type="text" disabled>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Teléfono:</label>
+            <div class="col-lg-8">
+              <input [(ngModel)]="cliente.Telefono" name="Telefono" class="form-control" type="text" disabled>
+            </div>
+          </div>
+          <div *ngIf="!rutasMode" class="form-group">
+            <label class="col-lg-3 control-label">Observaciones:</label>
+            <div class="col-lg-8">
+              <textarea [(ngModel)]="cliente.Observaciones" name="Observaciones" disabled rows="3" class="form-control"
+                required></textarea>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </ng-template>
+</ion-content>

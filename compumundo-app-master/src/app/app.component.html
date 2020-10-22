@@ -1,0 +1,39 @@
+<ion-app>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-header>
+      <ion-toolbar>
+        <img class="logo" src="../assets/logo.png" alt="">
+        <!--  
+        <ion-title>Agrícola Grotto</ion-title>
+        -->
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ng-template [ngIf]="isVendedor" [ngIfElse]="ruteroDiv">
+        <div class="userinfo">
+          {{userO?.CODUsuario}}
+          <br>
+          código: {{userO?.CODUsuarioV || userO?.Nombre}}
+        </div>
+      </ng-template>
+      <ng-template #ruteroDiv>
+        <div class="userinfo">
+          {{userO?.Nombre}}
+          <br>
+          código: {{userO?.CODGenerico}}
+        </div>
+      </ng-template>
+
+      <ion-list>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item (click)="cerrarSesion()">
+            <ion-label>
+              Cerrar sesión
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content" main></ion-router-outlet>
+</ion-app>

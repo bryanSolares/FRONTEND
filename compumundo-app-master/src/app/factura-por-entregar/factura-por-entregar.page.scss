@@ -1,0 +1,81 @@
+ion-title{
+    text-align: center;
+}
+
+.content{
+    padding: 30px 16px 80px 16px;
+}
+.small-title{
+    text-align: center;
+    color: grey;
+    font-size: 14px;
+    font-weight: 300;
+    margin-top: 16px;
+}
+.category-btns{
+    margin-bottom: 20px;
+    .btn{
+        text-align: left;
+    }
+}
+
+
+.bill-card{
+    background: #f9f9f9;
+    border: solid 1px #b5aafb;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #333333;
+
+    h3{
+        margin: 0px;
+        font-size: 1.2rem;
+    }
+    .bill-info{
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 5px;
+        border-bottom: solid 1px #e1e1e1;
+        h4, h5{
+            font-weight: 300;
+            font-size: .9rem;
+        }
+    }
+    .amount-add{
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 10px 0;
+        ion-input, input{
+            border: solid 1px gray;
+            border-radius: 4px;
+            display: inline-block;
+            width: 35%;
+            height: 36px;
+            padding: 10px;
+        }
+    }
+    .total-btns{
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-top: 10px;
+        border-top: solid 1px #e1e1e1;
+    }
+    .btn-actions{
+        text-align: right;
+        button:first-of-type{
+            margin-right:12px
+        }
+    }
+}
+
+footer{
+    .total{
+        color: var(--ion-color-primary);
+        font-weight: 600;
+        font-size: 1.2rem;
+    }
+}
